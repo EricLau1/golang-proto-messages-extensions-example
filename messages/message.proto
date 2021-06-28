@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+import "policy.proto";
+
+message Message {
+    string id = 1;
+    string title = 2 [(golang.registration.policy.editable) = true, (golang.registration.policy.protected) = true, (golang.registration.policy.custom_field_name) = "TitleC"];
+    string body = 3 [(golang.registration.policy.editable) = false, (golang.registration.policy.protected) = false, (golang.registration.policy.custom_field_name) = "BodyC"];
+    string author = 4;
+    int64 created = 5;
+    int64 updated = 6;
+}
+
+message GetMessagesRequest {
+
+}
+
+service Messenger {
+    rpc CreateMessage(Message) returns (Message);
+    rpc GetMessages(GetMessagesRequest) returns (stream Message);
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package golang.registration.policy;
+
+option go_package = "./pb";
+
+extend google.protobuf.FieldOptions {
+    bool protected = 50000;
+    bool editable = 50001;
+    string custom_field_name = 50002;
+}
